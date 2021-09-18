@@ -6,11 +6,20 @@ const { Pool } = require('pg')
 
 const MESSAGE_QUEUE = 'hello';
 const PORT = process.env.PORT || 5000
+const REDIS_AUTH_KEY = '6XkvmDVxtZz2ChMsKRLLtp4ZYrW3XpwQ'
 
 const REDIS_CONF = {
     host: 'redis-13910.c264.ap-south-1-1.ec2.cloud.redislabs.com',
     port: 13910,
     no_ready_check: true,
+}
+
+const DATABASE_CONF = {
+    user: 'gsensydp',
+    host: 'chunee.db.elephantsql.com',
+    database: 'gsensydp',
+    password: 'Y_xGLSYtGr5K53lE1q4XKcoIC4clJKGZ',
+    port: 5432,
 }
 
 app.get('/person/:id', async (req, res) => {
@@ -34,7 +43,7 @@ redisClient.on('error', err => {
     console.log(err.message)
 });
 
-redisClient.auth('6XkvmDVxtZz2ChMsKRLLtp4ZYrW3XpwQ', () => {
+redisClient.auth(REDIS_AUTH_KEY, () => {
     console.log('Authenticated')
 });
 
@@ -76,14 +85,7 @@ AMPQ.connect('amqps://umgtghjv:ilO7cGhzGKowX5uKUFRFC7CLy8G1G3nQ@puffin.rmq2.clou
  * Returns created database connection pool.
  */
 function startPool(){
-    const pool = new Pool({
-        user: 'gsensydp',
-        host: 'chunee.db.elephantsql.com',
-        database: 'gsensydp',
-        password: 'Y_xGLSYtGr5K53lE1q4XKcoIC4clJKGZ',
-        port: 5432,
-    })
-
+    const pool = new Pool(DATABASE_CONF)
     return pool
 }
 
