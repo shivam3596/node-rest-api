@@ -11,10 +11,12 @@ CREATE TABLE person (
 
 ```
 
-//SQL to create row in person table
+SQL to create row in person table
+```
 
 INSERT INTO person (person_id, name, city) VALUES(1,'shivam chauhan','muzaffarnagar');
 
 ```
+Endpoint to get a person with id 1
 
 https://node-rest1.herokuapp.com/person/1
