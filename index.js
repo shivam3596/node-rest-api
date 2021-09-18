@@ -5,7 +5,7 @@ const redis = require("redis");
 const { Pool } = require('pg')
 
 const MESSAGE_QUEUE = 'hello';
-const PORT = 3000
+const PORT = process.env.PORT || 5000
 
 const REDIS_CONF = {
     host: 'redis-13910.c264.ap-south-1-1.ec2.cloud.redislabs.com',
