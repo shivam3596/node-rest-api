@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const AMPQ = require('amqplib/callback_api');
+const AMQP = require('amqplib/callback_api');
 const redis = require("redis");
 const { Pool } = require('pg')
 
@@ -53,8 +53,8 @@ redisClient.on('connect', async () => {
 
 
 //RabbitMq connection      
-AMPQ.connect('amqps://umgtghjv:ilO7cGhzGKowX5uKUFRFC7CLy8G1G3nQ@puffin.rmq2.cloudamqp.com/umgtghjv', (ampqError, connection) => {
-    if (ampqError) throw ampqError
+AMQP.connect('amqps://umgtghjv:ilO7cGhzGKowX5uKUFRFC7CLy8G1G3nQ@puffin.rmq2.cloudamqp.com/umgtghjv', (amqpError, connection) => {
+    if (amqpError) throw amqpError
 
     connection.createChannel((error1, channel) => {
         if (error1) throw error1
